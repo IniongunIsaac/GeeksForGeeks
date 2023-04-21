@@ -1,13 +1,19 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GeeksMain {
     public static void main(String[] args) {
-//        String[] s1 = {"jrjiml", "tchetn", "ucrhye", "ynayhy", "cuhffd", "cvgpoiu", "znyadv"};
-//        String[] s2 = {"jr", "ml", "cvgpoi", "gpoiu", "wnmkmluc", "geheqe", "uglxagyl", "uyxdroj"};
-//        System.out.println(prefixSuffixString(s1, s2));
+        /*String[] s1 = {"jrjiml", "tchetn", "ucrhye", "ynayhy", "cuhffd", "cvgpoiu", "znyadv"};
+        String[] s2 = {"jr", "ml", "cvgpoi", "gpoiu", "wnmkmluc", "geheqe", "uglxagyl", "uyxdroj"};
+        System.out.println(prefixSuffixString(s1, s2));
 
         int[] numbers = {6,1,2,8,3,4,7,10,5};
         System.out.println(missingNumber(numbers, numbers.length));
+        */
+
+        int[] items = {0, 2, 1, 2, 0};
+        sort012(items, items.length);
+        System.out.println(Arrays.toString(items));
     }
 
     public static int prefixSuffixString(String s1[],String s2[]) {
@@ -108,5 +114,49 @@ public class GeeksMain {
         }
         return expectedSum - actualSum;
     }
+
+    public static void sort012(int a[], int n) {
+        int zeros = 0, ones = 0, twos = 0;
+        for (int i = 0; i < n; i++) {
+            switch (a[i]) {
+                case 0:
+                    zeros++;
+                case 1:
+                    ones++;
+                case 2:
+                    twos++;
+            }
+        }
+        Arrays.fill(a, 0, zeros, 0);
+        Arrays.fill(a, zeros, ones, 1);
+        Arrays.fill(a, ones, twos, 2);
+    }
+
+    public static void sort012DutchNationalFlagAlgorithm(int[] arr) {
+        int low = 0;
+        int mid = 0;
+        int high = arr.length - 1;
+        while (mid <= high) {
+            switch (arr[mid]) {
+                case 0:
+                    int temp = arr[low];
+                    arr[low] = arr[mid];
+                    arr[mid] = temp;
+                    low++;
+                    mid++;
+                    break;
+                case 1:
+                    mid++;
+                    break;
+                case 2:
+                    int temp2 = arr[high];
+                    arr[high] = arr[mid];
+                    arr[mid] = temp2;
+                    high--;
+                    break;
+            }
+        }
+    }
+
 
 }
