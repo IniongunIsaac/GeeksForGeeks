@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class GeeksMain {
     public static void main(String[] args) {
@@ -9,11 +10,15 @@ public class GeeksMain {
 
         int[] numbers = {6,1,2,8,3,4,7,10,5};
         System.out.println(missingNumber(numbers, numbers.length));
-        */
+
 
         int[] items = {0, 2, 1, 2, 0};
         sort012(items, items.length);
         System.out.println(Arrays.toString(items));
+         */
+
+        int[] numbers = {1,2,3,4,0};
+        System.out.println(leaders(numbers, numbers.length));
     }
 
     public static int prefixSuffixString(String s1[],String s2[]) {
@@ -158,5 +163,36 @@ public class GeeksMain {
         }
     }
 
+    static ArrayList<Integer> leaders(int arr[], int n) {
+        ArrayList<Integer> result = new ArrayList<>();
 
+        for (int i = 0; i < arr.length; i++) {
+            boolean isLeader = true;
+            for (int j = i + 1; j < arr.length; j++) {
+                isLeader = arr[i] >= arr[j];
+                if (!isLeader) {
+                    break;
+                }
+            }
+            if (isLeader) {
+                result.add(arr[i]);
+            }
+        }
+
+        return result;
+    }
+
+    public static ArrayList<Integer> findLeaders(int[] arr) {
+        ArrayList<Integer> leaders = new ArrayList<Integer>();
+        int maxSoFar = arr[arr.length - 1];
+        leaders.add(maxSoFar);
+        for (int i = arr.length - 2; i >= 0; i--) {
+            if (arr[i] >= maxSoFar) {
+                maxSoFar = arr[i];
+                leaders.add(maxSoFar);
+            }
+        }
+        Collections.reverse(leaders);
+        return leaders;
+    }
 }
